@@ -1,0 +1,295 @@
+//assumptions
+.input-section-with-header {
+  width: 80%;
+  margin-right: 30px;
+}
+
+//grey area
+.inputSection {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+//verification area and projected results
+.section-with-header {
+    margin-bottom: 30px !important;
+  }
+
+.section-header {
+  font-weight: bold;
+  color: #7cc242;
+  font-size: 125%;
+  line-height: 40px;
+}
+
+.slider {
+  -webkit-appearance: none;  
+  -moz-appearance: none;
+  overflow: hidden;
+  height: 12px;
+  border-radius: 5px; 
+  background: #e5e5e5;
+  outline: none; 
+  width: 175px !important;
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb, .dxSlider::-webkit-slider-thumb, .cnxSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #7cc242;
+  cursor: pointer;
+  box-shadow: -207px 0 0 200px #D6E8C9;
+}
+
+.slider::-moz-range-thumb, .dxSlider::-moz-range-thumb, .cnxSlider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border: none;
+  border-radius: 50%;
+  background: #7cc242;
+  cursor: pointer;
+  box-shadow: -207px 0 0 200px #D6E8C9;
+}
+
+/* Number input field */
+.numInput, .sliderInput {
+  border-radius: 5px;
+  border: 2px solid #e5e5e5;
+  margin-left: 5px;
+  text-align: center;
+  width: 45px;
+  height: 25px;
+}
+
+//includes slider title, slider, and corresponding number input
+.sliderContainer {
+  display: flex;
+  flex-direction: column;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  max-width: 40%;
+}
+
+.slider-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+// keeps percent with input block
+.sliderInput-percent {
+  display: flex;
+  flex: row;
+}
+
+.slider-section-header {
+  font-weight: bold;
+  text-align: left;
+  font-size: 110%;
+  line-height: 30px;
+}
+
+.slider-section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.error {
+  color: red;
+  font-size: 10px;
+}
+
+//table of inputs
+.unitSalesTable .error {
+  width: 60px;
+  line-height: 12px;
+}
+
+.blank_row_input
+{
+    height: 10px !important;
+}
+
+//removes Squarespace outline from text input sections
+.focus-visible {
+  outline: none !important;
+}
+
+// always make all increment buttons appear
+input[type=number]::-webkit-inner-spin-button {
+  opacity: 1;
+}
+
+//tooltip
+.slider-header-help {
+  display: flex;
+  flex-direction: row;
+}
+
+.tooltip {
+  min-width: 20px !important;
+  width: 20px !important;
+  padding-left: 7px;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: rgb(144,203,98);
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 10px;
+  margin-left: 5px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+//output section
+.outputSection {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0px;
+  border-radius: 10px;
+}
+
+// output table
+tr .rowNum {
+  text-align: center;
+  width: 110px;
+  background-color: rgba(144,203,98, 0.5);
+  border: 2px solid #D6E8C9;
+}
+
+tr .rowTitle {
+  text-align: left;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.blank_row
+{
+    height: 10px !important; 
+    background-color: #D6E8C9;
+}
+
+th {
+  font-weight: normal;
+  text-align: center;
+}
+
+.outputTable {
+  background-color: #D6E8C9;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 15px;
+}
+
+// highlighted numbers in output display (verification area)
+.outputValue {
+  font-size: 175%;
+  color: #7cc242;
+}
+
+.output-text-values {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+  border: 2px solid #7cc242;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.output-text-value {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.textOutput {
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.income-estimator {
+  display: flex;
+  flex-direction: row;
+  font-size: 80%;
+  line-height: 18px;
+}
+
+//ipad media query
+@media only screen and (max-width: 1010px) {
+  .income-estimator {
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .input-section-with-header {
+  	width: 100%;
+    margin-bottom: 30px !important;
+}
+  
+  .outputTable {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .output-text-values {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+}
+
+//semi-mobile media query
+@media only screen and (max-width: 860px) {
+  .income-estimator {
+    justify-content: center;
+  }
+  .inputSection {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+//mobile media query
+@media only screen and (max-width: 660px) {
+  .slider-section {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sliderContainer {
+    max-width: 100% !important;
+  }
+  
+  .numInput, .sliderInput {
+    width: 35px;
+  }
+  
+  .tooltip .tooltiptext {
+    width: 100px;
+  	margin-left: -145px !important;
+}
+}
