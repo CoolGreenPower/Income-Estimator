@@ -1,0 +1,256 @@
+<html>
+<body>
+<div class="income-estimator">
+  <!-- Assumptions -->
+<div class="input-section-with-header"><span class="section-header">Assumptions</span>
+  <br>
+  <span class="section-description">Please fill in the following with numbers that correspond to your current business operations. You can use the sliders or enter the number in the text box.</span>
+<div class="inputSection">
+<div class="unitSales"><span class="slider-section-header">Unit Sales</span><br>
+    <!--unit sales sliders-->
+    <div class="slider-section">
+        <!--tech/reseller slider-->
+        <div class="sliderContainer" id="trSliderContainer">
+          <div class="slider-header-help">
+          <span class="slider-header"># of Full-time HVAC Technicians</span>
+          <div class="tooltip"><img src="https://static1.squarespace.com/static/5f774b9cfc32556b4d56cb60/t/60744ffd714d5c5fc8254424/1618235389921/help+icon.png">
+  			<span class="tooltiptext">The number of AC technicians in your company.</span>
+			</div>
+            </div>
+          <div class="slider-input">
+            <input class="slider" id="trSlider" type="range" min="1" max="200" step="1" value="6"></input>
+            <input class="sliderInput" id="trNumberInput" type="number" value="6" min="1" max="200"><br><div class="error" id="trError"></div></input>
+      </div>
+        </div>
+        <!--PM Hours/Unit/Year slider-->
+  <div class="sliderContainer" id="pmSliderContainer">
+    <div class="slider-header-help">
+          <span class="slider-header">Average # of Hours of Preventive Maintenance per Unit per Year</span>
+          <div class="tooltip"><img src="https://static1.squarespace.com/static/5f774b9cfc32556b4d56cb60/t/60744ffd714d5c5fc8254424/1618235389921/help+icon.png">
+  			<span class="tooltiptext">The number of preventative maintenance hours per AC unit per year.</span>
+			</div>
+            </div>
+    <div class="slider-input">
+            <input class="slider" id="pmhSlider" type="range" min="1" max="12" step="0.5" value="2"></input>
+            <input class="sliderInput" id="pmhNumberInput" type="number" value="2" step="0.5" min="1" max="12"></input>
+            <div class="error" id="pmhError"></div>
+  		</div>
+        </div>
+        <!--Billable utilization slider-->
+  <div class="sliderContainer" id="buSliderContainer"><div class="slider-header-help">
+          <span class="slider-header">Billable Utilization Rate</span>
+          <div class="tooltip"><img src="https://static1.squarespace.com/static/5f774b9cfc32556b4d56cb60/t/60744ffd714d5c5fc8254424/1618235389921/help+icon.png">
+  			<span class="tooltiptext">The percentage of AC technician available hours that can be billed to a paying customer.</span>
+			</div>
+            </div>
+            <div class="slider-input">
+            <input class="slider" id="buSlider" type="range" min="30" max="100" step="1" value="60"></input>
+    <div class="sliderInput-percent">
+            <input class="sliderInput" id="buNumberInput" type="number" value="60" step="1" min="30" max="100">%</input>
+  </div>
+            <div class="error" id="buError"></div>
+  		</div>
+        </div>
+  		</div>
+    </div>
+
+<div class="laborSales"><span class="slider-section-header">Labor</span><br>
+    <!--labor sliders-->
+  <div class="slider-section">
+        <!--hourly rate to customers slider-->
+    <div class="sliderContainer" id="hrcSliderContainer"><div class="slider-header-help">
+          <span class="slider-header">Average Hourly Billing Rate</span>
+          <div class="tooltip"><img src="https://static1.squarespace.com/static/5f774b9cfc32556b4d56cb60/t/60744ffd714d5c5fc8254424/1618235389921/help+icon.png">
+  			<span class="tooltiptext">The rate that AC technician services are charged to an end customer.</span>
+			</div>
+            </div>
+      <div class="slider-input">
+            <input class="slider" id="hrcSlider" type="range" min="40" max="200" step="1" value="140"></input>
+            $<input class="sliderInput" id="hrcNumberInput" type="number" value="140" step="1" min="40" max="200"></input>
+            <div class="error" id="hrcError"></div>
+        </div>
+		</div>
+        <!--tech hourly cost slider-->
+<div class="sliderContainer" id="thcSliderContainer"><div class="slider-header-help">
+          <span class="slider-header">Average Hourly Cost per Technician</span>
+          <div class="tooltip"><img src="https://static1.squarespace.com/static/5f774b9cfc32556b4d56cb60/t/60744ffd714d5c5fc8254424/1618235389921/help+icon.png">
+  			<span class="tooltiptext">The gross hourly wage that the company pays the AC technician.</span>
+			</div>
+            </div>
+            <div class="slider-input">
+            <input class="slider" id="thcSlider" type="range" min="20" max="90" step="1" value="30"></input>
+            $<input class="sliderInput" id="thcNumberInput" type="number" value="30" step="1" min="20" max="90"></input>
+            <div class="error" id="thcError"></div>
+        </div>
+		</div>
+        <!--burden slider-->
+<div class="sliderContainer" id="bSliderContainer"><div class="slider-header-help">
+          <span class="slider-header">Labor Burden Rate</span>
+          <div class="tooltip"><img src="https://static1.squarespace.com/static/5f774b9cfc32556b4d56cb60/t/60744ffd714d5c5fc8254424/1618235389921/help+icon.png">
+  			<span class="tooltiptext">The payroll related taxes that are the employer’s share; this number does not include office space, trucks, and other non-payroll related companies costs.</span>
+			</div>
+            </div>
+            <div class="slider-input">
+            <input class="slider" id="bSlider" type="range" min="20" max="90" step="1" value="30"></input>
+  <div class="sliderInput-percent">
+            <input class="sliderInput" id="bNumberInput" type="number" value="30" step="1" min="20" max="90">%</input>
+</div>
+            <div class="error" id="bError"></div>
+        </div>
+	</div>
+        <!--# of technicians per call slider-->
+<div class="sliderContainer" id="tpcSliderContainer"><div class="slider-header-help">
+          <span class="slider-header"># Technicians Per Call</span>
+          <div class="tooltip"><img src="https://static1.squarespace.com/static/5f774b9cfc32556b4d56cb60/t/60744ffd714d5c5fc8254424/1618235389921/help+icon.png">
+  			<span class="tooltiptext">How may AC technicians are normally sent for a service call.</span>
+			</div>
+            </div>
+  		<div class="slider-input">
+            <input class="slider" id="tpcSlider" type="range" min="1" max="4" step="1" value="1"></input>
+            <input class="sliderInput" id="tpcNumberInput" type="number" value="1" step="1" min="1" max="4"></input>
+            <div class="error" id="tpcError"></div>
+        </div>
+	</div>
+</div>
+</div>
+<br>
+<!-- Input table Systems section -->
+<div class="unitSalesIncrement"><span class="slider-section-header">Systems</span>
+    <table class="unitSalesTable">
+        <tr>
+        <th></th>
+        <th>Year 1</th>
+        <th>Year 2</th>
+        <th>Year 3</th>
+        </tr>
+        <tr class="DXtableContents">
+            <td><div class="slider-header-help">
+          <span class="table-input-header">% of DX Units Under Preventive Maintenance</span>
+          <div class="tooltip"><img src="https://static1.squarespace.com/static/5f774b9cfc32556b4d56cb60/t/60744ffd714d5c5fc8254424/1618235389921/help+icon.png">
+  			<span class="tooltiptext">Out of the DX Cooling systems that the company has installed, checked, or fixed over the past 3 years, the % of that total that has an annual Preventative Maintenance contract.</span>
+			</div>
+            </div></td>
+            <td>
+                <input class="numInput" id="dxNumberInput1" type="number" value="20" step="1" min="1" max="100"></input>
+                <div class="default" id="dxDefault1" value="20"></div>
+                <div class="error" id="dxNumError1"></div>
+            </td>
+            <td>
+                <input class="numInput" id="dxNumberInput2" type="number" value="30" step="1" min="1" max="100"></input>
+                <div class="default" id="dxDefault2" value="30"></div>
+                <div class="error" id="dxNumError2"></div>
+            </td>
+            <td>
+                <input class="numInput" id="dxNumberInput3" type="number" value="35" step="1" min="1" max="100"></input>
+                <div class="default" id="dxDefault3" value="35"></div>
+                <div class="error" id="dxNumError3"></div>
+            </td>
+        </tr>
+        <tr class="blank_row_input">
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+          <td><div class="slider-header-help">
+          <span class="table-input-header">% of Units Under Preventative Maintenance Your Team Can Convert to COOLNOMIX</span>
+          <div class="tooltip"><img src="https://static1.squarespace.com/static/5f774b9cfc32556b4d56cb60/t/60744ffd714d5c5fc8254424/1618235389921/help+icon.png">
+  			<span class="tooltiptext">The % of customers that currently have Preventive Maintenance contracts which you believe you could convert to COOLNOMIX customers.</span>
+			</div>
+            </div></td>
+            <td>
+                <input class="numInput" id="cnxNumberInput1" type="number" value="5" step="1" min="5" max="100"></input>
+                <div class="default" id="cnxDefault1" value="5"></div>
+                <div class="error" id="cnxNumError1"></div>
+            </td>
+            <td>
+                <input class="numInput" id="cnxNumberInput2" type="number" value="10" step="1" min="10" max="100"></input>
+                <div class="default" id="cnxDefault2" value="10"></div>
+                <div class="error" id="cnxNumError2"></div>
+            </td>
+            <td>
+                <input class="numInput" id="cnxNumberInput3" type="number" value="15" step="1" min="15" max="100"></input>
+                <div class="default" id="cnxDefault3" value="15"></div>
+                <div class="error" id="cnxNumError3"></div>
+            </td>
+        </tr>
+    </table>
+</div>
+</div>
+</div>
+<div class="outputSection">
+  <!-- Verification Area -->
+  <div class="section-with-header"><span class="section-header">Verification Points</span>
+    <br>
+    <span class="section-description">If any of the following quantities or costs do not match your current business operations, please adjust your assumptions until they match.</span>
+  <div class="output-text-values">
+    <!--hvac units per tech output-->
+    <div class="output-text-value">
+      <div class="textOutput" id="hutOut"><output class="outputValue"></output><br>HVAC Units per Technician</div>
+    </div>
+    <!--total units to service output-->
+    <div class="output-text-value">
+      <div class="textOutput" id="tusOut"><output class="outputValue"></output><br>Total Units to Service</div>
+    </div>
+    <!--tech cost with burden output-->
+    <div class="output-text-value">
+      <div class="textOutput" id="tcbOut"><output class="outputValue"></output><br>Technician Cost with Burden</div>
+    </div>
+  </div>
+    </div>
+  <!-- Output table -->
+  <div class="section-with-header"><span class="section-header">Projected Results</span>
+    <br>
+    <span class="section-description">Below are the Project Results, predicted by your assumptions. You can adjust assumptions to see how it would impact your results.</span>
+    <div class="outputTable">
+        <table>
+            <tr>
+            <th></th>
+            <th class="rowHeader">Year 1</th>
+            <th class="rowHeader">Year 2</th>
+            <th class="rowHeader">Year 3</th>
+            </tr>
+            <tr>
+                <td class="rowTitle"># of DX units under PM</td>
+                <td class="rowNum" id="numDXOut1"></td>
+                <td class="rowNum" id="numDXOut2"></td>
+                <td class="rowNum" id="numDXOut3"></td>
+            </tr>
+            <tr>
+                <td class="rowTitle"># COOLNOMIX Converted</td>
+                <td class="rowNum" id="numCNXOut1"></td>
+                <td class="rowNum" id="numCNXOut2"></td>
+                <td class="rowNum" id="numCNXOut3"></td>
+            </tr>
+            <tr>
+                <td class="rowTitle">Incremental PM Projection</td>
+                <td class="rowNum" id="incrPMOut1"></td>
+                <td class="rowNum" id="incrPMOut2"></td>
+                <td class="rowNum" id="incrPMOut3"></td>
+            </tr>
+            <tr class="blank_row">
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td class="rowTitle">Subtotal Reseller Revenue</td>
+                <td class="rowNum" id="resRevOut1"></td>
+                <td class="rowNum" id="resRevOut2"></td>
+                <td class="rowNum" id="resRevOut3"></td>
+            </tr>
+            <tr>
+            <tr>
+                <td class="rowTitle">Incremental PM Revenue</td>
+                <td class="rowNum" id="incrPMRevOutput1"></td>
+                <td class="rowNum" id="incrPMRevOutput2"></td>
+                <td class="rowNum" id="incrPMRevOutput3"></td>
+            </tr>
+                <td class="rowTitle">CNX Driven Revenue</td>
+                <td class="rowNum" id="cnxRevOutput1"></td>
+                <td class="rowNum" id="cnxRevOutput2"></td>
+                <td class="rowNum" id="cnxRevOutput3"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</div>
+</div>
+</body>
+</html>
