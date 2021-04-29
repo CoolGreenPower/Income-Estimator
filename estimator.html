@@ -1,7 +1,6 @@
 <html>
 <body>
 <div class="income-estimator">
-  <!-- Assumptions -->
 <div class="input-section-with-header"><span class="section-header">Assumptions</span>
   <br>
   <span class="section-description">Please fill in the following with numbers that correspond to your current business operations. You can use the sliders or enter the number in the text box.</span>
@@ -45,9 +44,7 @@
             </div>
             <div class="slider-input">
             <input class="slider" id="buSlider" type="range" min="30" max="100" step="1" value="60"></input>
-    <div class="sliderInput-percent">
-            <input class="sliderInput" id="buNumberInput" type="number" value="60" step="1" min="30" max="100">%</input>
-  </div>
+            <input class="sliderInput" id="buNumberInput" type="number" value="60" step="1" min="30" max="100"><span class="percent">%</span></input>
             <div class="error" id="buError"></div>
   		</div>
         </div>
@@ -92,9 +89,7 @@
             </div>
             <div class="slider-input">
             <input class="slider" id="bSlider" type="range" min="20" max="90" step="1" value="30"></input>
-  <div class="sliderInput-percent">
-            <input class="sliderInput" id="bNumberInput" type="number" value="30" step="1" min="20" max="90">%</input>
-</div>
+            <input class="sliderInput" id="bNumberInput" type="number" value="30" step="1" min="20" max="90"><span class="percent">%</span></input>
             <div class="error" id="bError"></div>
         </div>
 	</div>
@@ -114,7 +109,6 @@
 </div>
 </div>
 <br>
-<!-- Input table Systems section -->
 <div class="unitSalesIncrement"><span class="slider-section-header">Systems</span>
     <table class="unitSalesTable">
         <tr>
@@ -177,7 +171,6 @@
 </div>
 </div>
 <div class="outputSection">
-  <!-- Verification Area -->
   <div class="section-with-header"><span class="section-header">Verification Points</span>
     <br>
     <span class="section-description">If any of the following quantities or costs do not match your current business operations, please adjust your assumptions until they match.</span>
@@ -196,7 +189,6 @@
     </div>
   </div>
     </div>
-  <!-- Output table -->
   <div class="section-with-header"><span class="section-header">Projected Results</span>
     <br>
     <span class="section-description">Below are the Project Results, predicted by your assumptions. You can adjust assumptions to see how it would impact your results.</span>
