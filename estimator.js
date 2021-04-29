@@ -1,5 +1,8 @@
 //custom slider javascript
 $(function() {
+    
+    //initializing all variables for calculations
+    
     var $rangeslider = $('input[type="range"]');
     var $amount = $('input[type="number"]');
     var bht = 2000; // standard billable hours/tech num
@@ -89,6 +92,7 @@ $(function() {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
     
+    //print values for verification points section
     function textOutput(element, value) {
         element.value = value;
         var textOutput = element.getElementsByClassName('outputValue')[0];
@@ -97,6 +101,8 @@ $(function() {
     
     //updates values of each variable
     function setVars() {
+        
+        //slider/input values for unit sales and labor
         trIn = parseFloat($('#trSlider').val()); // techns per reseller
         pmhIn = parseFloat($('#pmhSlider').val()); // PM hours per unit per year
         buIn = parseFloat($('#buSlider').val()); // billable utilization
@@ -112,6 +118,7 @@ $(function() {
         tcb = thcIn*(1+(bIn / 100)); // tech cost with burden
         tcbRounded = Math.round(thcIn*(1+(bIn / 100)));
 
+        //Systems input section values 
         percDXIn1 = Math.round($('#dxDefault1').attr('value'));
         percDXIn2 = Math.round($('#dxDefault2').attr('value'));
         percDXIn3 = Math.round($('#dxDefault3').attr('value'));
@@ -119,6 +126,7 @@ $(function() {
         percCNXIn2 = Math.round($('#cnxDefault2').attr('value'));
         percCNXIn3 = Math.round($('#cnxDefault3').attr('value'));
 
+        //verification points values
         hutOut.innerHTML = hut;
         tusOut.innerHTML = tus;
         tcbOut.innerHTML = tcb;
@@ -216,41 +224,17 @@ $(function() {
         $('#resRevOut1').html("$" + numberWithCommas(resRevOut1));
         $('#resRevOut2').html("$" + numberWithCommas(resRevOut2));
         $('#resRevOut3').html("$" + numberWithCommas(resRevOut3));
-        //Subtotal Reseller Cost Output
-        $('#resCostOut1').html("$" + numberWithCommas(resCostOut1));
-        $('#resCostOut2').html("$" + numberWithCommas(resCostOut2));
-        $('#resCostOut3').html("$" + numberWithCommas(resCostOut3));
-        //Subtotal Reseller GP Output
-        $('#resGPOut1').html("$" + numberWithCommas(resGPOut1));
-        $('#resGPOut2').html("$" + numberWithCommas(resGPOut2));
-        $('#resGPOut3').html("$" + numberWithCommas(resGPOut3));
         //Incremental PM Revenue Output
         $('#incrPMRevOutput1').html("$" + numberWithCommas(incrPMRevOutput1));
         $('#incrPMRevOutput2').html("$" + numberWithCommas(incrPMRevOutput2));
         $('#incrPMRevOutput3').html("$" + numberWithCommas(incrPMRevOutput3));
-        //Incremental PM Cost Output
-        $('#incrPMCostOutput1').html("$" + numberWithCommas(incrPMCostOutput1));
-        $('#incrPMCostOutput2').html("$" + numberWithCommas(incrPMCostOutput2));
-        $('#incrPMCostOutput3').html("$" + numberWithCommas(incrPMCostOutput3));
-        //Incremental PM GP Output
-        $('#incrPMGPOutput1').html("$" + numberWithCommas(incrPMGPOutput1));
-        $('#incrPMGPOutput2').html("$" + numberWithCommas(incrPMGPOutput2));
-        $('#incrPMGPOutput3').html("$" + numberWithCommas(incrPMGPOutput3));
-        //CNX Driven Revenue 
+        //CNX Driven Revenue Output
         $('#cnxRevOutput1').html("$" + numberWithCommas(cnxRevOutput1));
         $('#cnxRevOutput2').html("$" + numberWithCommas(cnxRevOutput2));
         $('#cnxRevOutput3').html("$" + numberWithCommas(cnxRevOutput3));
-        //CNX Driven GP
-        $('#cnxGPOutput1').html("$" + numberWithCommas(cnxGPOutput1));
-        $('#cnxGPOutput2').html("$" + numberWithCommas(cnxGPOutput2));
-        $('#cnxGPOutput3').html("$" + numberWithCommas(cnxGPOutput3));
-        //CNX Driven GP
-        $('#cnxMarginOutput1').html(cnxMarginOutput1 + "%");
-        $('#cnxMarginOutput2').html(cnxMarginOutput2 + "%");
-        $('#cnxMarginOutput3').html(cnxMarginOutput3 + "%");
     }
 
-    
+    //update min/max values within systems input section, based on other input values
     function updateMinMax() {
         document.getElementById('dxNumberInput1').max = $('#dxDefault2').attr('value');
         document.getElementById('dxNumberInput2').min = $('#dxDefault1').attr('value');
@@ -264,48 +248,57 @@ $(function() {
     }
     
     
+    //when slider is interacted with, calculate values
     $rangeslider
     .on('input', function(e) {
         calculate(e, this.value);
      });
     
     
+    //when number input is interacted with, manage error handling and calculate when able
     $amount
     .on('input', function(e) {
         var thisError = this.parentNode.getElementsByClassName("error")[0];
         updateMinMax();
 
+        //if input value is outside of min/max bounds, don't calculate and print error message
         if (parseInt(this.value, 10) < this.min || parseInt(this.value, 10) > this.max) {
             thisError.innerHTML = "Please enter a value between " + this.min + " and " + this.max + ".";
         }
-        // if values are in bounds, and error message can be removed
+        // if values are in bounds, calculate values and error message can be removed
         else if (parseInt(this.value, 10) >= e.target.min && parseInt(this.value, 10) <= e.target.max){
             calculate(e, this.value);
             thisError.innerHTML = "";
         }
-        // if value is NaN
+        // if value is NaN, don't calculate and don't print error message
         else if (Number.isNaN(parseInt(this.value))) {
             thisError.innerHTML = "";
         }
 
     });
     
+    //update new values based on selected slider or number input
     function calculate(e, newValue) {
+        //slider
         if ($(e.target).attr('class') == "slider") {
             var thisInput = e.target.parentNode.getElementsByClassName("sliderInput")[0];
             thisInput.value = newValue;
         }
+        //number input for slider (unit sales or labor section)
         else if ($(e.target).attr('class') == "sliderInput focus-visible") {
             var thisSlider = e.target.parentNode.getElementsByClassName("slider")[0];
             thisSlider.value = newValue;
         }
+        //number input for systems section
         else if ($(e.target).attr('class') == "numInput focus-visible") {
             $(e.target.parentNode.getElementsByClassName("default")[0]).attr("value", newValue);
         }
+        //reset all variables on every calculation
         setVars();
         updateMinMax();
     }
 
+    //set all variables on page load
     $(document).ready(function() {
       setVars();
       });
