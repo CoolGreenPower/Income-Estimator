@@ -1,8 +1,8 @@
 //custom slider javascript
-$(function() {
-    
+$(function () {
+
     //initializing all variables for calculations
-    
+
     var $rangeslider = $('input[type="range"]');
     var $amount = $('input[type="number"]');
     var bht = 2000; // standard billable hours/tech num
@@ -86,22 +86,22 @@ $(function() {
     var cnxMarginOutput2; //CNX GP Margin output 2
     var cnxMarginOutput3; //CNX GP Margin output 3
 
-    
+
     //adds commas as digit separators to numbers greater than 999
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-    
+
     //print values for verification points section
     function textOutput(element, value) {
         element.value = value;
         var textOutput = element.getElementsByClassName('outputValue')[0];
         textOutput.innerHTML = element.value;
     }
-    
+
     //updates values of each variable
     function setVars() {
-        
+
         //slider/input values for unit sales and labor
         trIn = parseFloat($('#trSlider').val()); // techns per reseller
         pmhIn = parseFloat($('#pmhSlider').val()); // PM hours per unit per year
@@ -115,8 +115,8 @@ $(function() {
         hutRounded = Math.round(bht / pmhIn * (buIn / 100));
         tus = trIn * hut; // total units to service
         tusRounded = Math.round(trIn * hut);
-        tcb = thcIn*(1+(bIn / 100)); // tech cost with burden
-        tcbRounded = Math.round(thcIn*(1+(bIn / 100)));
+        tcb = thcIn * (1 + (bIn / 100)); // tech cost with burden
+        tcbRounded = Math.round(thcIn * (1 + (bIn / 100)));
 
         //Systems input section values 
         percDXIn1 = Math.round($('#dxDefault1').attr('value'));
@@ -130,7 +130,7 @@ $(function() {
         hutOut.innerHTML = hut;
         tusOut.innerHTML = tus;
         tcbOut.innerHTML = tcb;
-    
+
         textOutput(document.getElementById('hutOut'), numberWithCommas(hutRounded));
         textOutput(document.getElementById('tusOut'), numberWithCommas(tusRounded));
         textOutput(document.getElementById('tcbOut'), numberWithCommas("$" + tcbRounded));
@@ -145,7 +145,7 @@ $(function() {
         //CNX % converted
         numCNXOut1 = Math.round((percCNXIn1 / 100) * numDXOut1);
         numCNXOut2 = Math.round((percCNXIn2 / 100) * numDXOut2);
-        numCNXOut3 = Math.round(( percCNXIn3 / 100) * numDXOut3);
+        numCNXOut3 = Math.round((percCNXIn3 / 100) * numDXOut3);
 
         //Incremental PM Projection
         incrPMProj1 = 0;
@@ -160,10 +160,10 @@ $(function() {
         labCostUnit = tcb * hpCNX * tpcIn; //Loaded Labor Cost per unit
         totalCostUnit = costUnit + labCostUnit; //Total Cost per Unit
         gpCNXUnit = totalRevUnit - totalCostUnit; //GP per CNX Unit
-        gpCNXHour = gpCNXUnit/(hpCNX*tpcIn); //GP per CNX tech hour
+        gpCNXHour = gpCNXUnit / (hpCNX * tpcIn); //GP per CNX tech hour
 
         //Subtotal Reseller Revenue
-        resRevOut1 = Math.round(numCNXOut1 * totalRevUnit); 
+        resRevOut1 = Math.round(numCNXOut1 * totalRevUnit);
         resRevOut2 = Math.round(numCNXOut2 * totalRevUnit);
         resRevOut3 = Math.round(numCNXOut3 * totalRevUnit);
 
@@ -179,13 +179,13 @@ $(function() {
 
         //Incremental PM Revenue
         incrPMRevOutput1 = 0;
-        incrPMRevOutput2 = Math.round((incrPMProj2 - incrPMProj1)*pmhIn*hrcIn);
-        incrPMRevOutput3 = Math.round((incrPMProj3 - incrPMProj1)*pmhIn*hrcIn);
-        
+        incrPMRevOutput2 = Math.round((incrPMProj2 - incrPMProj1) * pmhIn * hrcIn);
+        incrPMRevOutput3 = Math.round((incrPMProj3 - incrPMProj1) * pmhIn * hrcIn);
+
         //Incremental PM Cost
         incrPMCostOutput1 = 0;
-        incrPMCostOutput2 = Math.round((incrPMProj2 - incrPMProj1)*pmhIn*tcb);
-        incrPMCostOutput3 = Math.round((incrPMProj3 - incrPMProj1)*pmhIn*tcb);
+        incrPMCostOutput2 = Math.round((incrPMProj2 - incrPMProj1) * pmhIn * tcb);
+        incrPMCostOutput3 = Math.round((incrPMProj3 - incrPMProj1) * pmhIn * tcb);
 
         //Incremental GP Cost
         incrPMGPOutput1 = 0;
@@ -203,9 +203,9 @@ $(function() {
         cnxGPOutput3 = incrPMGPOutput3 + resGPOut3;
 
         //CNX GP Margin
-        cnxMarginOutput1 = Math.round((cnxGPOutput1/cnxRevOutput1)*100);
-        cnxMarginOutput2 = Math.round((cnxGPOutput2/cnxRevOutput2)*100);
-        cnxMarginOutput3 = Math.round((cnxGPOutput3/cnxRevOutput3)*100);
+        cnxMarginOutput1 = Math.round((cnxGPOutput1 / cnxRevOutput1) * 100);
+        cnxMarginOutput2 = Math.round((cnxGPOutput2 / cnxRevOutput2) * 100);
+        cnxMarginOutput3 = Math.round((cnxGPOutput3 / cnxRevOutput3) * 100);
 
 
         //# of Units under PM Output
@@ -246,37 +246,37 @@ $(function() {
         document.getElementById('cnxNumberInput2').max = $('#cnxDefault3').attr('value');
         document.getElementById('cnxNumberInput3').min = $('#cnxDefault2').attr('value');
     }
-    
-    
+
+
     //when slider is interacted with, calculate values
     $rangeslider
-    .on('input', function(e) {
-        calculate(e, this.value);
-     });
-    
-    
+        .on('input', function (e) {
+            calculate(e, this.value);
+        });
+
+
     //when number input is interacted with, manage error handling and calculate when able
     $amount
-    .on('input', function(e) {
-        var thisError = this.parentNode.getElementsByClassName("error")[0];
-        updateMinMax();
+        .on('input', function (e) {
+            var thisError = this.parentNode.getElementsByClassName("error")[0];
+            updateMinMax();
 
-        //if input value is outside of min/max bounds, don't calculate and print error message
-        if (parseInt(this.value, 10) < this.min || parseInt(this.value, 10) > this.max) {
-            thisError.innerHTML = "Please enter a value between " + this.min + " and " + this.max + ".";
-        }
-        // if values are in bounds, calculate values and error message can be removed
-        else if (parseInt(this.value, 10) >= e.target.min && parseInt(this.value, 10) <= e.target.max){
-            calculate(e, this.value);
-            thisError.innerHTML = "";
-        }
-        // if value is NaN, don't calculate and don't print error message
-        else if (Number.isNaN(parseInt(this.value))) {
-            thisError.innerHTML = "";
-        }
+            //if input value is outside of min/max bounds, don't calculate and print error message
+            if (parseInt(this.value, 10) < this.min || parseInt(this.value, 10) > this.max) {
+                thisError.innerHTML = "Please enter a value between " + this.min + " and " + this.max + ".";
+            }
+            // if values are in bounds, calculate values and error message can be removed
+            else if (parseInt(this.value, 10) >= e.target.min && parseInt(this.value, 10) <= e.target.max) {
+                calculate(e, this.value);
+                thisError.innerHTML = "";
+            }
+            // if value is NaN, don't calculate and don't print error message
+            else if (Number.isNaN(parseInt(this.value))) {
+                thisError.innerHTML = "";
+            }
 
-    });
-    
+        });
+
     //update new values based on selected slider or number input
     function calculate(e, newValue) {
         //slider
@@ -299,7 +299,7 @@ $(function() {
     }
 
     //set all variables on page load
-    $(document).ready(function() {
-      setVars();
-      });
+    $(document).ready(function () {
+        setVars();
+    });
 });
